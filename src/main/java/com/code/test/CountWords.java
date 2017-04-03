@@ -1,4 +1,4 @@
-package com.code.test;
+package codeTest;
 
 public class CountWords {
 
@@ -13,8 +13,21 @@ public class CountWords {
      *      should also implement unit tests that ensure your code is
      *      production quality.
      */
+	public static void main(String[] args) {
+		CountWords wordCount = new CountWords();
+		System.out.println(wordCount.countWords("Jamie is having an interesting day"));
+		//wordCount.countWords("Jamie is having an interesting day");
+	}
+	
     public int countWords(String sentence) {
-        return 0;
+    	int count = 0;
+    	char[] charArray = sentence.toCharArray();
+    	for(int i = 0; i < charArray.length; i++){
+    		if (isSpace(charArray[i])){
+    			count++;
+    		}
+    	}
+        return count + 1;//Because there will always be a word after the last space
     }
 
     /**
