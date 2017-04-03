@@ -1,4 +1,4 @@
-package codeTest;
+package com.code.test;
 
 public class CountWords {
 
@@ -15,19 +15,36 @@ public class CountWords {
      */
 	public static void main(String[] args) {
 		CountWords wordCount = new CountWords();
-		System.out.println(wordCount.countWords("Jamie is having an interesting day"));
-		//wordCount.countWords("Jamie is having an interesting day");
+		SentenceInput sentence = new SentenceInput();
+		String input = sentence.getUserInput("Enter a sentence to evaluate:");
+		
+		System.out.println(wordCount.countWords(input));
+		
 	}
 	
     public int countWords(String sentence) {
     	int count = 0;
+    	int sLength = 0;
+    	boolean isWord = false;
+    	
+    	if (sentence.isEmpty()){
+    		return 0;
+    	}
+    	sentence = sentence.trim();
+    	sLength = sentence.length() - 1;
     	char[] charArray = sentence.toCharArray();
+    	
     	for(int i = 0; i < charArray.length; i++){
-    		if (isSpace(charArray[i])){
+    		if (!isSpace(charArray[i]) && i != sLength){
+    			isWord = true;
+    		} else if (isSpace(charArray[i]) && isWord){
+    			count++;
+    			isWord = false;
+    		} else if (!isSpace(charArray[i]) && i == sLength){
     			count++;
     		}
     	}
-        return count + 1;//Because there will always be a word after the last space
+        return count;
     }
 
     /**
